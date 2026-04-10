@@ -14,7 +14,6 @@ const { theme, toggle } = useTheme()
   {theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}
 </button>
 
-
 const PAGE_TITLES = {
   '/': 'Dashboard',
   '/live': 'Feed en vivo',
