@@ -1,18 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { Bell, RefreshCw } from 'lucide-react'
-import { format } from 'date-fns'
-import { es } from 'date-fns/locale'
-import { useTheme } from '../context/ThemeContext'
 import { Bell, RefreshCw, Sun, Moon } from 'lucide-react'
-
-// dentro del componente:
-const { theme, toggle } = useTheme()
-
-// en el JSX, junto a los otros iconButtons:
-<button onClick={toggle} style={styles.iconBtn} title="Cambiar tema">
-  {theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}
-</button>
+import { format } from 'date-fns'
+import { useTheme } from '../context/ThemeContext'
 
 const PAGE_TITLES = {
   '/': 'Dashboard',
@@ -90,6 +80,7 @@ const styles = {
 export default function Topbar() {
   const location = useLocation()
   const [now, setNow] = useState(new Date())
+  const { theme, toggle } = useTheme()
 
   useEffect(() => {
     const t = setInterval(() => setNow(new Date()), 1000)
@@ -112,6 +103,9 @@ export default function Topbar() {
           Sistema activo
         </div>
         <span style={styles.clock}>{format(now, 'HH:mm:ss')}</span>
+        <button onClick={toggle} style={styles.iconBtn} title="Cambiar tema">
+          {theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}
+        </button>
         <button style={styles.iconBtn} title="Refrescar">
           <RefreshCw size={14} />
         </button>
