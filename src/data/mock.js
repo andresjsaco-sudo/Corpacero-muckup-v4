@@ -32,6 +32,32 @@ export const DAILY_DATA = Array.from({ length: 30 }, (_, i) => ({
   low: Math.floor(Math.random() * 20 + 8),
 }))
 
+const METAL_IMAGES = {
+  critical: [
+    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=640&q=80',
+    'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=640&q=80',
+    'https://images.unsplash.com/photo-1589118949245-7d38baf380d6?w=640&q=80',
+    'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=640&q=80',
+  ],
+  moderate: [
+    'https://images.unsplash.com/photo-1541123437800-1bb1317badc2?w=640&q=80',
+    'https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?w=640&q=80',
+    'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=640&q=80',
+    'https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=640&q=80',
+  ],
+  low: [
+    'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=640&q=80',
+    'https://images.unsplash.com/photo-1614850715649-1d0106293bd1?w=640&q=80',
+    'https://images.unsplash.com/photo-1504309092620-4d0ec726efa4?w=640&q=80',
+    'https://images.unsplash.com/photo-1553708881-112abc53fe54?w=640&q=80',
+  ],
+}
+
+const metalImage = (sev) => {
+  const pool = METAL_IMAGES[sev]
+  return pool[Math.floor(Math.random() * pool.length)]
+}
+
 export const INSPECTIONS = Array.from({ length: 40 }, (_, i) => {
   const sev = ['critical', 'moderate', 'low'][Math.floor(Math.random() * 3)]
   const zone = ZONES[Math.floor(Math.random() * ZONES.length)]
@@ -43,7 +69,7 @@ export const INSPECTIONS = Array.from({ length: 40 }, (_, i) => {
     timestamp: subHours(new Date(), Math.floor(Math.random() * 168)),
     thickness: (Math.random() * 4 + 2).toFixed(1),
     rustArea: (Math.random() * 35 + 2).toFixed(1),
-    image: `https://picsum.photos/seed/${i + 10}/400/300`,
+    image: metalImage(sev),
     lat: zone.lat + (Math.random() - 0.5) * 0.002,
     lng: zone.lng + (Math.random() - 0.5) * 0.002,
     notes: ['Corrosión uniforme en superficie expuesta', 'Picaduras profundas detectadas', 'Oxidación superficial incipiente', 'Descamación en bordes', 'Corrosión galvánica en unión'][Math.floor(Math.random() * 5)],
@@ -51,14 +77,14 @@ export const INSPECTIONS = Array.from({ length: 40 }, (_, i) => {
 })
 
 export const LIVE_FRAMES = Array.from({ length: 12 }, (_, i) => {
-  const sev = Math.random() > 0.6 ? 'critical' : Math.random() > 0.4 ? 'moderate' : 'low'
+  const sev = i < 3 ? 'critical' : i < 7 ? 'moderate' : 'low'
   return {
     id: `FRAME-${i}`,
     timestamp: subMinutes(new Date(), i * 3),
     zone: ZONES[Math.floor(Math.random() * ZONES.length)].id,
     severity: sev,
     confidence: Math.floor(Math.random() * 30 + 65),
-    image: `https://picsum.photos/seed/${100 + i}/640/480`,
+    image: metalImage(sev),
     detections: Math.floor(Math.random() * 4 + 1),
   }
 })

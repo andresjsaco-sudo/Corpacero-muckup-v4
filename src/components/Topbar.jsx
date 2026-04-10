@@ -3,6 +3,17 @@ import { useLocation } from 'react-router-dom'
 import { Bell, RefreshCw } from 'lucide-react'
 import { format } from 'date-fns'
 import { es } from 'date-fns/locale'
+import { useTheme } from '../context/ThemeContext'
+import { Bell, RefreshCw, Sun, Moon } from 'lucide-react'
+
+// dentro del componente:
+const { theme, toggle } = useTheme()
+
+// en el JSX, junto a los otros iconButtons:
+<button onClick={toggle} style={styles.iconBtn} title="Cambiar tema">
+  {theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}
+</button>
+
 
 const PAGE_TITLES = {
   '/': 'Dashboard',

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
@@ -43,6 +45,38 @@
   --topbar-height: 52px;
 }
 
+.light {
+  --bg-base: #f4f4f5;
+  --bg-surface: #ffffff;
+  --bg-raised: #f9f9fa;
+  --bg-hover: #f0f0f2;
+  --bg-active: rgba(12, 92, 171, 0.08);
+
+  --border: rgba(0, 0, 0, 0.07);
+  --border-md: rgba(0, 0, 0, 0.12);
+  --border-strong: rgba(0, 0, 0, 0.2);
+
+  --text-primary: #09090b;
+  --text-secondary: rgba(0, 0, 0, 0.6);
+  --text-muted: rgba(0, 0, 0, 0.35);
+
+  --accent: #0C5CAB;
+  --accent-dim: rgba(12, 92, 171, 0.1);
+  --accent-border: rgba(12, 92, 171, 0.3);
+
+  --success: #059669;
+  --success-bg: rgba(5, 150, 105, 0.08);
+  --success-border: rgba(5, 150, 105, 0.25);
+
+  --warning: #d97706;
+  --warning-bg: rgba(217, 119, 6, 0.08);
+  --warning-border: rgba(217, 119, 6, 0.25);
+
+  --danger: #dc2626;
+  --danger-bg: rgba(220, 38, 38, 0.08);
+  --danger-border: rgba(220, 38, 38, 0.25);
+}
+
 html, body, #root {
   height: 100%;
   background: var(--bg-base);
@@ -52,6 +86,7 @@ html, body, #root {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   overflow: hidden;
+  transition: background 0.2s, color 0.2s;
 }
 
 ::-webkit-scrollbar { width: 4px; height: 4px; }
@@ -65,4 +100,5 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   background: var(--bg-raised) !important;
   font-family: var(--font) !important;
 }
+.light .leaflet-tile-pane { filter: none; }
 .leaflet-tile-pane { filter: brightness(0.75) saturate(0.6); }
